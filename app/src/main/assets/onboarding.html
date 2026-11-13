@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Modexa Pro</title><style>
+:root{--r:#e11d2e;--r2:#ff4d5e;--bg:#0a0305;--t:#fff;--m:#b9a3a6}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;overflow:hidden}
+.bg{position:fixed;inset:0;background:radial-gradient(60% 40% at 50% 0,#4a0a12,transparent),var(--bg)}
+.orb{position:fixed;border-radius:50%;filter:blur(60px);background:var(--r);opacity:.35;animation:fl 9s ease-in-out infinite}
+.o1{width:220px;height:220px;left:-60px;top:20%}.o2{width:260px;height:260px;right:-90px;bottom:5%;animation-delay:-4s}
+@keyframes fl{50%{transform:translate(30px,-40px) scale(1.15)}}
+.wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 24px 28px}
+.track{flex:1;display:flex;width:300%;transition:transform .6s cubic-bezier(.2,.9,.25,1)}
+.s{width:33.333%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8px}
+.s h1{font-size:28px;margin:28px 0 10px}.s p{color:var(--m);line-height:1.5;max-width:320px}
+.s>*{opacity:0;transform:translateY(24px)}.s.on>*{animation:up .7s forwards}.s.on>*:nth-child(2){animation-delay:.12s}.s.on>*:nth-child(3){animation-delay:.24s}.s.on>*:nth-child(4){animation-delay:.36s}
+@keyframes up{to{opacity:1;transform:none}}
+.wave{display:flex;gap:6px;align-items:center;height:110px}.wave i{width:9px;border-radius:9px;background:linear-gradient(var(--r2),var(--r));height:30px;animation:w 1.1s ease-in-out infinite}
+@keyframes w{50%{height:100px}}
+.card{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:340px}
+.card div{background:#ffffff0d;border:1px solid #ff4d5e33;border-radius:16px;padding:16px 8px;font-size:13px;font-weight:600}
+.card b{display:block;font-size:22px;color:var(--r2);margin-bottom:4px}
+.av{width:128px;height:128px;border-radius:50%;padding:5px;background:conic-gradient(var(--r),var(--r2),#7a0a14,var(--r));animation:spin 6s linear infinite;position:relative}
+.av>div{width:100%;height:100%;border-radius:50%;background:#1a0a0d center/cover;display:grid;place-items:center;font-size:44px;font-weight:800;animation:spin 6s linear infinite reverse;color:var(--r2)}
+@keyframes spin{to{transform:rotate(1turn)}}
+input[type=text]{margin-top:22px;width:100%;max-width:300px;padding:14px 16px;border-radius:14px;border:1px solid #ff4d5e55;background:#ffffff10;color:#fff;font-size:16px;outline:none;text-align:center}
+input[type=text]:focus{border-color:var(--r2);box-shadow:0 0 0 4px #e11d2e33}
+.link{margin-top:12px;color:var(--r2);font-size:14px;font-weight:600;background:none;border:0}
+.bot{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.dots{display:flex;gap:8px}.dots i{width:8px;height:8px;border-radius:8px;background:#ffffff33;transition:.4s}.dots i.on{width:26px;background:var(--r)}
+button.go{flex:1;max-width:200px;padding:15px;border:0;border-radius:16px;font-size:16px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--r2),var(--r));box-shadow:0 8px 28px #e11d2e66;animation:pulse 2s infinite}
+button.go:active{transform:scale(.96)}@keyframes pulse{50%{box-shadow:0 8px 40px #e11d2eaa}}
+</style></head><body><div class="bg"></div><div class="orb o1"></div><div class="orb o2"></div>
+<div class="wrap"><div class="track" id="tr">
+<div class="s on"><div class="wave" id="wv"></div><h1>Modexa Pro</h1><p>Studio-grade mic processor Discord Web-er jonno. Gain, EQ, gate, limiter sob ek jaygay.</p></div>
+<div class="s"><div class="card"><div><b>1500 dB</b>Input Gain</div><div><b>5000 dB</b>Output Gain</div><div><b>EQ + Gate</b>Bass &amp; Presence</div><div><b>Presets</b>One-tap modes</div></div><h1>Power Controls</h1><p>Live VU meter, noise gate, drive, safe limiter ar panic reset button shoho.</p></div>
+<div class="s"><div class="av"><div id="av">M</div></div><input type="text" id="nm" placeholder="Tomar naam" maxlength="20"><button class="link" id="pk">Profile pic bachho</button><h1 style="font-size:22px">Profile toiri koro</h1></div>
+</div><div class="bot"><div class="dots"><i class="on"></i><i></i><i></i></div><button class="go" id="nx">Next</button></div></div>
+<input type="file" id="fi" accept="image/*" hidden>
+<script>
+const D='https://discord.com/app';let i=0,img='';
+try{const p=JSON.parse(MXA.getProfile());if(p.done){location.replace(D)}}catch(e){}
+const wv=document.getElementById('wv');for(let k=0;k<13;k++){const b=document.createElement('i');b.style.animationDelay=(k*.08)+'s';wv.appendChild(b)}
+const S=[...document.querySelectorAll('.s')],dots=[...document.querySelectorAll('.dots i')],nx=document.getElementById('nx'),nm=document.getElementById('nm'),av=document.getElementById('av');
+function show(){tr.style.transform=`translateX(-${i*33.333}%)`;S.forEach((s,k)=>s.classList.toggle('on',k==i));dots.forEach((d,k)=>d.classList.toggle('on',k==i));nx.textContent=i==2?'Start':'Next'}
+nx.onclick=()=>{if(i<2){i++;show()}else{const n=nm.value.trim()||'User';try{MXA.saveProfile(n,img)}catch(e){}location.replace(D)}};
+let x0=null;document.addEventListener('touchstart',e=>x0=e.touches[0].clientX);document.addEventListener('touchend',e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;if(d<-60&&i<2)i++;if(d>60&&i>0)i--;show();x0=null});
+nm.oninput=()=>{if(!img)av.textContent=(nm.value[0]||'M').toUpperCase()};
+pk.onclick=()=>fi.click();
+fi.onchange=()=>{const f=fi.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d'),m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,256,256);img=c.toDataURL('image/jpeg',.85);av.style.backgroundImage=`url(${img})`;av.textContent=''};im.src=r.result};r.readAsDataURL(f)};
+</script></body></html>
